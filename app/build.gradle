@@ -27,13 +27,20 @@ android {
             storePassword 'xrj45yWGLbsO7W0v'
             keyPassword 'xrj45yWGLbsO7W0v'
         }
+        release {
+          storeFile file(System.getenv("KEYSTORE_FILE"))
+          keyAlias System.getenv("KEY_ALIAS")
+          storePassword System.getenv("KEYSTORE_PASS")
+          keyPassword System.getenv("KEYSTORE_PASS")
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled true
-            shrinkResources false // Reproducible builds
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
         }
 
         debug {
